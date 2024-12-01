@@ -16,6 +16,16 @@ const userSchema = new Schema({
       password: {
         type: String,
         required: true,
+      },
+      otp:{
+        type: Number
+      },
+      otpCreated:{
+        type: Date
+      },
+      isOtpVerified:{
+        type:Boolean,
+        default : false
       }
 
 },{timestamps:true})
