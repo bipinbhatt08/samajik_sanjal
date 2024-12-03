@@ -7,6 +7,6 @@ const { isAuthenticated } = require("../middlewares/isAuthenticated")
 const { upload } = require("../middlewares/multer")
 
 const pictureUpload = upload.fields([{ name: 'profilePic', maxCount: 1 }, { name: 'coverPic', maxCount: 1 }])
-router.route('/setUpProfile').post(pictureUpload,isAuthenticated,catchAsync(setUpProfile))
+router.route('/setUpProfile').post(pictureUpload,isAuthenticated,setUpProfile)
 
 module.exports= router
