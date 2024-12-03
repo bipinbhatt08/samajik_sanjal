@@ -2,11 +2,10 @@
 const User = require("../models/user.model")
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const sendEmail = require("../../services/sendMail");
+const sendEmail = require("../services/sendMail");
 
 const saltRounds = 10;
 exports.registerNewUser = async(req,res)=>{
-    try {
         const {username,email,password}= req.body
         if(!username||!email||!password){
            return res.status(400).json({
@@ -30,16 +29,10 @@ exports.registerNewUser = async(req,res)=>{
         res.status(200).json({
             message:"User registered successfully"
         })
-    } catch (error) {
-        console.log(error.message)
-        res.status(500).json({
-            message:"Internal server error"
-        })
     }
-}
 
 exports.loginUser = async(req,res)=>{
-    try {
+
         const {email,password} = req.body
         const userExist = await User.findOne({email})
 
@@ -62,14 +55,7 @@ exports.loginUser = async(req,res)=>{
             token, 
             userDetails: userExist
         })
-    } catch (error) {
-        console.log(error)
-        return res.status(500).json({
-            message:"Internal server error",
-            
-        })
     }
-}
 
 exports.forgetPassword = async(req,res)=>{
     const {email} = req.body
@@ -105,7 +91,7 @@ exports.verifyOTP = async(req,res)=>{
     const {otp,email}=req.body
     const userExist = await User.findOne({email})
     if(!userExist){
-       return  res.status(404).json({
+       return  res.status(401).json({
             message: "Don't do this sir.."
         })
     }

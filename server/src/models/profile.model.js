@@ -1,5 +1,5 @@
-import mongoose from 'mongoose';
-const { Schema, model } = mongoose;
+const  mongoose =  require('mongoose') 
+const { Schema, model } = mongoose
 const profileSchema = new Schema({
   profilePic:{
     type: String
@@ -7,13 +7,29 @@ const profileSchema = new Schema({
   coverPic:{
     type:String
   },
-  about:{
-    type:Object
+  bio: {
+    type: String
+    },
+  address: {
+      type: String
+    },
+  dateOfBirth: {
+      type: String
+    },
+  phoneNumber: {
+      type: String
+    },
+  user:{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
   },
-  friends:{
-    type: Array
+  gender:{
+    type:String,
+    enum : ["Male","Female","Other"],
+    
   }
+
 //should be managed later
 });
 const Profile = model('Profile', profileSchema);
-export default Profile;
+module.exports = Profile

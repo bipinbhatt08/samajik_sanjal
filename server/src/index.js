@@ -14,7 +14,9 @@ dbConnection()
 app.use(express.json())
 
 const userRoute = require('./routes/user.route')
+const profileRoute = require('./routes/profile.route')
 app.use('',userRoute)
+app.use('',profileRoute)
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+  console.log(`Samajik Sanjal app listening on port ${port}`)
 })
