@@ -1,5 +1,6 @@
-const Profile = require("../models/profile.model")
+const Profile = require("../models/profile.model");
 const fs = require('fs');
+const User = require("../models/user.model");
 
 // to delete file
 const deleteFile=(fileName)=>{
@@ -32,7 +33,7 @@ exports.setUpProfile =async(req,res)=>{
  
      }
      const {bio,address,dateOfBirth,phoneNumber,gender}=req.body
-     if(!bio||!address||!dateOfBirth||!phoneNumber||!profilePic||!coverPic||!gender||!user){
+     if(!bio||!address||!dateOfBirth||!phoneNumber||!profilePic||!coverPic||!gender){
         if(coverPic) deleteFile(coverPic)
         if(profilePic) deleteFile(profilePic)
          return res.status(400).json({
@@ -55,7 +56,37 @@ exports.setUpProfile =async(req,res)=>{
    }
 }
 
+exports.getProfile = async(req,res)=>{
+    const userId = req.user?._id
+    const userExist = await User.findById(userId)
+    if(!userExist){
+        return res.status(404).json({
+            message:"User does not exists"
+        })
+    }
+    const profile = await Profile.findOne({user:userId})
+    if(!profile){
+        return res.status(404).json({
+            message:"Profile does not exists."
+        })
+    }
+    res.status(200).json({
+        message:"Profile fetched successfully.",
+        data:profile
+    })
 
-exports.editProfile=async(req,res)=>{
+}
 
+exports.getProfileOfOthers = async(req,res)=>{
+    const user = req.params.id
+    const profileExists = await Profile.findOne({user})
+    if(!profileExists){
+        return res.status(404).json({
+            message:"No profile found."
+        })
+    }
+    res.status(200).json({
+        message:"Profile fetched succesfully",
+        data: profileExists
+    })
 }
