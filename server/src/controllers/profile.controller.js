@@ -1,17 +1,8 @@
 const Profile = require("../models/profile.model");
-const fs = require('fs');
 const User = require("../models/user.model");
+const { deleteFile } = require("../services/deleteFile");
 
-// to delete file
-const deleteFile=(fileName)=>{
-    fs.unlink(`public/uploads/${fileName}`,(err)=>{
-        if(err){
-            console.log("Error deleting file",err)
-        }else{
-            console.log("File deleted succesfully")
-        }
-    })
-}
+
 
 //collect data page by page
 // hold all data in redux.

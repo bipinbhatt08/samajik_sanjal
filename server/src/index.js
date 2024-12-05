@@ -15,8 +15,10 @@ app.use(express.json())
 
 const userRoute = require('./routes/user.route')
 const profileRoute = require('./routes/profile.route')
+const postRoute = require('./routes/post.route')
 app.use('',userRoute)
 app.use('',profileRoute)
+app.use('',postRoute)
 app.listen(port, () => {
   console.log(`Samajik Sanjal app listening on port ${port}`)
 })
