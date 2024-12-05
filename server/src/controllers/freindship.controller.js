@@ -4,7 +4,6 @@ const User = require("../models/user.model")
 exports.checkFriendshipStatus=async(req,res)=>{
     const userA= req.user._id
     const userB= req.params.id
-    
     const userBexists= await User.findById(userB)
     if(!userBexists){
         return res.status(400).json({
@@ -12,8 +11,7 @@ exports.checkFriendshipStatus=async(req,res)=>{
         })
     }
     //error aauna sakxa A le send gareko Id B le accept garda so kei work garnu paryo tesma
-    let newUser
-    let oldUser
+    let newUser, oldUser
     ///thulo wala naya ho
     if(String(userA)>String(userB)){
        newUser=userA,
@@ -21,10 +19,10 @@ exports.checkFriendshipStatus=async(req,res)=>{
     }
     const FriendshipStatus = await Friendship.findOne({userA:newUser,userB:oldUser})
     if(!FriendshipStatus){
-        const data = await Friendship.create({userA:newUser,userB:oldUser})
-        return res.status(200).json({
-            message:"Friendship Status created successfully",
-            data
+        return res.status(400).json({
+            message:"No friendship found",
+            data:'Not initiated'
+            
         })
     }
     res.status(200).json({
@@ -34,7 +32,7 @@ exports.checkFriendshipStatus=async(req,res)=>{
 
 }
 
-exports.changeFriendshipStatus = async(req,res)=>{
+exports.changeFriendshipStatus = async(req,res)=>{ //friend request pani garne
     const userA= req.user._id
     const userB= req.params.id
     const {status} = req.body
@@ -55,8 +53,10 @@ exports.changeFriendshipStatus = async(req,res)=>{
     }
     const FriendshipExists = await Friendship.findOne({userA:newUser,userB:oldUser})
     if(!FriendshipExists){
-        return res.status(404).json({
-            message:"No Friendship found. You can not accept/reject/unfriend unless request is sent"
+        const data = await Friendship.create({userA:newUser,userB:oldUser})
+        return res.status(200).json({
+            message:"Friendship Status created successfully",
+            data
         })
     }
     FriendshipExists.status=status
