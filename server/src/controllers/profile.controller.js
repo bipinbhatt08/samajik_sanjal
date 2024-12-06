@@ -25,6 +25,7 @@ exports.setUpProfile =async(req,res)=>{
      }
      const {bio,address,dateOfBirth,phoneNumber,gender}=req.body
      if(!bio||!address||!dateOfBirth||!phoneNumber||!profilePic||!coverPic||!gender){
+        console.log("hello bhatij")
         if(coverPic) deleteFile(coverPic)
         if(profilePic) deleteFile(profilePic)
          return res.status(400).json({
@@ -38,6 +39,7 @@ exports.setUpProfile =async(req,res)=>{
    } catch (error) {
     const profilePic = req.files['profilePic']?.[0]?.filename
     const coverPic = req.files['coverPic']?.[0]?.filename
+        console.log("hello")
         if (coverPic)deleteFile(coverPic)
         if (profilePic)deleteFile(profilePic)
         res.status(500).json({

@@ -8,7 +8,7 @@ const { upload } = require("../middlewares/multer")
 
 const pictureUpload = upload.fields([{ name: 'profilePic', maxCount: 1 }, { name: 'coverPic', maxCount: 1 }])
 router.route('/profile')
-.post(pictureUpload,isAuthenticated,setUpProfile)
+.post(isAuthenticated,pictureUpload,setUpProfile)
 .get(isAuthenticated,catchAsync(getProfile))
 // .patch(pictureUpload,isAuthenticated,catchAsync(editProfile))
 
