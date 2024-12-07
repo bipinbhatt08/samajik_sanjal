@@ -41,3 +41,35 @@ exports.createPost=async(req,res)=>{
     })
     
 }
+exports.getPostByUserId = async(req,res)=>{
+    const {userId} = req.query
+    const userExist = await User.findById(userId)
+    if(!userExist){
+        return res.status(404).json({
+            message:"Invalid user id"
+        })
+    }
+    const hasPosts = await Post.find({user})
+    if(hasPosts.length==0){
+        return res.status(404).json({
+            message:"No posts found for provided user"
+        })
+    }
+    res.status(200).json({
+        message:"Post fetched successfully",
+        data:hasPosts
+    })
+}
+exports.getPostById = async(req,res)=>{
+    const {postId} = req.params
+    const postExist = await Post.findById(postId)
+    if(!postExist){
+        return res.status(404).json({
+            message:"Invalid post id"
+        })
+    }
+    res.status(200).json({
+        message:"Post fetched successfully",
+        data:postExist
+    })
+}

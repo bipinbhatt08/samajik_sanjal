@@ -18,3 +18,4 @@ exports.addComment = async(req,res)=>{
         data:newComment
     })
 }
+
