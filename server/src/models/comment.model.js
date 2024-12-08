@@ -38,7 +38,11 @@ const commentSchema = new Schema({
                 default: Date.now 
             }
         }
-    ]
+    ],
+    isEdited:{
+        type:Boolean,
+        default: false
+    }
 
 },{timestamps:true})
 
