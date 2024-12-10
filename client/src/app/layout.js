@@ -2,6 +2,7 @@ import "./globals.css";
 import { Providers } from "./providers";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ReduxProvider from "@/redux/reduxProvider";
 export const metadata = {
   title: "Samajik Sanjal",
   description: "Connect and share with friends",
@@ -20,22 +21,25 @@ export default function RootLayout({ children }) {
         className={'antialiased'}
         style={{ fontFamily: 'Inter, sans-serif'}}
       > 
+    <ReduxProvider>
 
-      <Providers>
-      <ToastContainer
-        position="top-right"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-        />
-        {children}
-      </Providers>
+        <Providers>
+        <ToastContainer
+          position="top-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+          />
+          {children}
+        </Providers>
+
+    </ReduxProvider>
       </body>
     </html>
   );
