@@ -30,7 +30,6 @@ exports.registerNewUser = async(req,res)=>{
             message:"User registered successfully"
         })
     }
-
 exports.loginUser = async(req,res)=>{
 
         const {email,password} = req.body
@@ -56,7 +55,6 @@ exports.loginUser = async(req,res)=>{
             userDetails: userExist
         })
     }
-
 exports.forgetPassword = async(req,res)=>{
     const {email} = req.body
     const userExist = await User.findOne({email})
