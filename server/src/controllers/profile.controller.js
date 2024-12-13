@@ -72,7 +72,9 @@ exports.getProfile = async(req,res)=>{
 
 exports.getProfileOfOthers = async(req,res)=>{
     const user = req.params.id
-    const profileExists = await Profile.findOne({user})
+    const profileExists = await Profile.findOne({user}).populate({
+        path: "user",select: "username email -_id"
+    })
     if(!profileExists){
         return res.status(404).json({
             message:"No profile found."

@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+const path = require('path')
 var cors = require('cors')
 app.use(cors())
 
@@ -9,6 +10,8 @@ const port = process.env.PORT
 app.get('/', (req, res) => {
     res.send('Hello World!')
 })
+
+app.use(express.static('public'))//serve files or folder int he public folder
 
 const dbConnection = require('./db/connection')
 dbConnection()

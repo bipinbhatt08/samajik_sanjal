@@ -42,7 +42,7 @@ import {
               </Link>
             </NavbarItem>
             <NavbarItem>
-              <Link color="foreground" href="#">
+              <Link color="foreground" href="#" className="flex flex-wrap item-cnete">
                 <IoNotifications/>
               </Link>
             </NavbarItem>
