@@ -1,12 +1,12 @@
 'use client'
 import axios from 'axios'
-import { useParams } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 
 const page = () => {
 const params = useParams()
 const [profile,setProfile]=useState({})
-
+const router = useRouter()
 useEffect(()=>{
      fetchProfile()
 },[])
@@ -14,7 +14,9 @@ const fetchProfile = async()=>{
     const res = await axios.get(`http://localhost:5001/profile/${params.id}`)
     
     setProfile(res.data.data)
-    
+    if(res.status!==200){
+      router.push('/setprofile')
+    }
 }
 const { user } = profile || {}; // Destructure user safely
 return ( 
