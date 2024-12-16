@@ -20,7 +20,7 @@ import { useSelector } from "react-redux";
  
   export default function App() {
 
-
+console.log("HELLo",process.env.NEXT_PUBLIC_API_URI)
 
     const userDetails = useSelector((state)=>(state.user.userDetails))
     
@@ -78,7 +78,7 @@ import { useSelector } from "react-redux";
                 color="secondary"
                 name={userDetails.username}
                 size="sm"
-                src={`http://localhost:5001/uploads/${userDetails?.profilePic}`}
+                src={`${process.env.NEXT_PUBLIC_API_URI}/uploads/${userDetails?.profilePic}`}
               />
             </DropdownTrigger>
             <DropdownMenu aria-label="Profile Actions" variant="flat">

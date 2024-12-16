@@ -30,7 +30,7 @@ const page = () => {
     });
 
     const handleLogin = async (values) => {
-        const res = await axios.post('http://localhost:5001/login', values, {
+        const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URI}/login`, values, {
             headers: {
                 'Content-Type': 'application/json'
             }

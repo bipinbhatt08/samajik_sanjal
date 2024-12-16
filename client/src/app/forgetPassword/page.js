@@ -27,7 +27,7 @@ const page = () => {
     });
 
     const handleForgetPassword = async (values) => {
-        const res = await axios.post('http://localhost:5001/forgetPassword', values, {
+        const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URI}/forgetPassword`, values, {
             headers: {
                 'Content-Type': 'application/json'
             }

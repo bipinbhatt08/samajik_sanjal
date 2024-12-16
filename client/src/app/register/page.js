@@ -37,7 +37,7 @@ const page = () => {
     });
 
     const handleRegister = async (values) => {
-        const res = await axios.post('http://localhost:5001/register', values, {
+        const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URI}/register`, values, {
             headers: {
                 'Content-Type': 'application/json'
             }

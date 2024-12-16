@@ -30,7 +30,7 @@ const page = () => {
     });
 
     const handleForgetPassword = async (values,email) => {
-        const res = await axios.post(`http://localhost:5001/verifyOtp`, {...values,email}, {
+        const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URI}/verifyOtp`, {...values,email}, {
             headers: {
                 'Content-Type': 'application/json'
             }

@@ -33,7 +33,7 @@ const page = () => {
     });
 
     const resetPassword = async (values) => {
-        const res = await axios.post('http://localhost:5001/resetPassword', {...values,email}, {
+        const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URI}/resetPassword`, {...values,email}, {
             headers: {
                 'Content-Type': 'application/json'
             }

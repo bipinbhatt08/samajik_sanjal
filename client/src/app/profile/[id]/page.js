@@ -11,7 +11,7 @@ useEffect(()=>{
      fetchProfile()
 },[])
 const fetchProfile = async()=>{
-    const res = await axios.get(`http://localhost:5001/profile/${params.id}`)
+    const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URI}/profile/${params.id}`)
     
     setProfile(res.data.data)
     if(res.status!==200){
@@ -27,9 +27,9 @@ return (
        <div>User name is : {user?.username } </div>
        <div>Address: {profile?.address}</div>
        <div>Address: {profile?.address}</div>
-         Profile PIc <img src={`http://localhost:5001/uploads/${profile?.profilePic}`} alt="mo img" width='100' />
+         Profile PIc <img src={`${process.env.NEXT_PUBLIC_API_URI}/uploads/${profile?.profilePic}`} alt="mo img" width='100' />
        <div></div>
-       COver Pic <img src={`http://localhost:5001/uploads/${profile?.coverPic}`} alt="mo img" width='100' />
+       COver Pic <img src={`${process.env.NEXT_PUBLIC_API_URI}/uploads/${profile?.coverPic}`} alt="mo img" width='100' />
        <div></div>
        <div></div>
     </div>
