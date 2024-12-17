@@ -1,0 +1,13 @@
+
+.profilePicContainer{
+    width: 150px;
+    height:130px ;
+    /* overflow: hidden; */
+}
+ .profilePic{
+    border-radius: 100% !important;
+    height: 100% !important;
+    width: 100% !important;
+    /* border: 3px solid red; */
+    object-fit: cover;
+ }
