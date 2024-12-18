@@ -1,11 +1,13 @@
 'use client'
 import styles from './profile.module.css';
+import { FaLocationDot,FaEnvelope,FaPhoneVolume, FaCalendarDay } from "react-icons/fa6";
 
 import axios from 'axios'
 import { useParams, useRouter } from 'next/navigation'
 import Navbar from '@/components/navbar'
 import React, { useEffect, useState } from 'react'
-import { Avatar, Button, Image } from '@nextui-org/react';
+import { Avatar, AvatarGroup, Button, ButtonGroup } from '@nextui-org/react';
+import Post from '@/components/Post';
 
 const page = () => {
 const params = useParams()
@@ -26,7 +28,7 @@ const { user } = profile || {}; // Destructure user safely
 return ( 
     <div>
     
-        <main className={`${styles.ok} container mx-auto `}>
+        <main className={`${styles.ok} container mx-auto  `}>
           <section className=''>
             <div className={` ${styles.coverpicContainer}   flex items-center justify-center h-[20vh] lg:h-[30vh] xl-h[35vh]`}>
             <img
@@ -53,20 +55,30 @@ return (
             </div>
 
           </section>
-          <section className="bioAndOthers mx-2 my-5">
+          <section className="bioAndOthers px-2 py-5 ">
             <div className="bio mb-5">
             <p className='text-lg'>{profile?.bio}</p>
             </div>
             <hr />
-            <div className="information mt-3 flex flex-col justify-center gap-1">
-            <p className="address">Lives in <b>{profile?.address}</b></p>
-            <p className="address">Contact <b>{profile?.phoneNumber}</b></p>
-            <p className="address">Email <b>{profile?.user?.email}</b></p>
-            <p className="address">Born on <b>{profile?.dateOfBirth}</b></p>
+            <div className="information pt-3 flex flex-col justify-center gap-1 text-gray-800 ">
+              <div className="flex justify-start items-center "><p className='text-xl  mr-1'><FaLocationDot/></p>  Lives in &nbsp;<b>{profile?.address}</b></div>
+              <div className="flex justify-start items-center "><p className='text-xl  mr-1'><FaPhoneVolume/></p>  Contact no. &nbsp;<b>{profile?.phoneNumber}</b></div>
+              <div className="flex justify-start items-center "><p className='text-xl  mr-1'><FaEnvelope/></p>  Email&nbsp; <b>{profile?.user?.email}</b></div>
+              <div className="flex justify-start items-center "><p className='text-xl  mr-1'><FaCalendarDay/></p>  Born on&nbsp; <b>{profile?.dateOfBirth}</b></div>
             </div>
           </section>
-          <section className="posts">
-            Post will be shown herer
+
+          {/* POSTS GOES FORM HERE */}
+          <section className="posts  ">
+            <Post/>
+            <Post/>
+            <Post/>
+            <Post/>
+            <Post/>
+            <Post/>
+            <Post/>
+            <Post/>
+            <Post/>
           </section>
         </main>
 
