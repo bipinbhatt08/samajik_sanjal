@@ -71,6 +71,8 @@ return (
           {/* POSTS GOES FORM HERE */}
           <section className="posts  ">
             <Post/>
+            <Post/>
+            <Post/>
             
           </section>
         </main>

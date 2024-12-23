@@ -1,9 +1,9 @@
-import { Avatar, Button, Tooltip } from '@nextui-org/react'
-import EmojiPicker, { Emoji } from 'emoji-picker-react';
-import React, { useCallback, useState } from 'react'
+import { Avatar, Tooltip } from '@nextui-org/react'
+import { Emoji } from 'emoji-picker-react';
+import React, { useState } from 'react'
 import { FaThumbsUp } from "react-icons/fa";
 
-const Post = () => {
+const TestPost = () => {
 
   const reactions = { 
     like: {
@@ -11,10 +11,10 @@ const Post = () => {
       color: 'text-blue-600',
       label: 'Like'
     },
-    care: {
-      unified: '1f917',
-      color: 'text-orange-400',
-      label: 'Care'
+    love: {
+      unified: '2764-fe0f',
+      color: 'text-red-600',
+      label: 'Love'
     },
     haha: {
       unified: '1f602',
@@ -37,24 +37,27 @@ const Post = () => {
       label: 'Angry'
     }
   }
-
   const reactionForToolTip = Object.values(reactions).map((reaction)=>reaction.unified)
   const [reaction,setReaction]=useState(reactions.like)
 
-
   const [isReacted,setIsReacted]=useState(false)
-  const [isTootipOpen, setisTootipOpen]= useState(false)
 
   
-  const handleReaction=(e)=>{
-    const selectedReaction= Object.entries(reactions).find((current, index)=>current[1].unified == e.unified)
+  const handleReaction=(emojiCode,event)=>{
+    const selectedReaction= Object.entries(reactions).find((current, index)=>current[1].unified == emojiCode)
     setReaction(selectedReaction[1])
     setIsReacted(true)
-    setisTootipOpen(false)
   }
 
 
+const handleLikeButtonClick =()=>{
+   if(isReacted===false){
+    setIsReacted(true)
+    setReaction(reactions.like)
+   }
 
+
+}
   return (
     <>
       <div className="post border border-gray-300 mb-5 rounded-md pt-4 pr-4 pl-4 bg-white ">
@@ -71,14 +74,14 @@ const Post = () => {
                       <p> 3 yrs ago</p>
                   </div>
               </div>
-              {/* post Content goes here */}
+            {/* post Content goes here */}
               <div className="postStatus">
                 <p>Sunsan xa goth paana kasya nai khau mui</p>
               </div>
               <div className="images">
                 images here
               </div>
-              {/* POST FOOTER GOES HERE */}
+            {/* POST FOOTER GOES HERE */}
               <div className="postFooter mt-3">
               <div className="CountsContainer flex justify-between items-center py-1">
                 <div className="reactionCount">
@@ -93,39 +96,49 @@ const Post = () => {
               <div className="reactionAndCommentBtns flex justify-between items-center py-1 border-t border-gray-300 ">
                 
                 <Tooltip
-                isOpen={isTootipOpen} onOpenChange={(open) => setisTootipOpen(open)}
-                content={ 
-                   <EmojiPicker 
-                   onReactionClick={handleReaction}
-                   className='border-none' emojiStyle='facebook' allowExpandReactions={false} reactionsDefaultOpen={true} reactions={reactionForToolTip} />
-                   }>
-                  <button 
-                  className={
-                    `${ isReacted?reaction.color:''}
-                    font-bold
-                    border px-5 py-1 rounded-sm border-hidden text-gray-400 flex justify-center items-center gap-2  hover:bg-gray-100`
+                    delay={1000}
+                    // isOpen={isTootipOpen} onOpenChange={(open) => setisTootipOpen(open)}
+                    content={ 
+                        <div className='emojis flex justify-center items-center gap-2'>
+                            {reactionForToolTip.map((em)=>{
+                            return <button onClick={(e)=>handleReaction(em,e)} id={em} key={em}><Emoji unified={em} size={25} emojiStyle='facebook'/> </button>
+                            })}
+                                
+                        </div>
                     }>
-                    
+
+
+                  <button onClick={handleLikeButtonClick} className={`${ isReacted?reaction.color:''} font-bold  border px-5 py-1 rounded-sm border-hidden text-gray-400 flex justify-center items-center gap-2  hover:bg-gray-100`}>
                     {
-                    isReacted ? 
-                    <>
-                        <Emoji unified={reaction.unified} size={25} emojiStyle='facebook'></Emoji> {reaction.label}
-                    </>
+                    isReacted ? <><Emoji unified={reaction.unified} size={25} emojiStyle='facebook'></Emoji> {reaction.label}</>
                     : 
-                    <>
-                        <FaThumbsUp /> <span>Like</span>
-                    </>
-    } 
+                    <><FaThumbsUp /> <span>Like</span></>
+                    }
                   </button>
+
+
+
+
                 </Tooltip>
+
+
+
+
+                {/* comment section */}
                 <div className="comment">
                  🗨️ Comment
                 </div>
+                
               </div>
-            </div>
-            </div>
+
+              <div className="commentSection">
+
+                comment section
+              </div>
+              </div>
+      </div>
     </>
   )
 }
 
-export default Post
+export default TestPost
