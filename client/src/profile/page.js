@@ -6,22 +6,36 @@ import axios from 'axios'
 import { useParams, useRouter } from 'next/navigation'
 import Navbar from '@/components/navbar'
 import React, { useEffect, useState } from 'react'
-import { Avatar, AvatarGroup, Button, ButtonGroup } from '@nextui-org/react';
+import { Avatar, Button } from '@nextui-org/react';
 import Post from '@/components/Post';
 
 const page = () => {
-const params = useParams()
 const [profile,setProfile]=useState({})
 const router = useRouter()
 useEffect(()=>{
      fetchProfile()
 },[])
+
+
 const fetchProfile = async()=>{
-    const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URI}/profile/${params.id}`)
-    setProfile(res.data.data)
-    if(res.status!==200){
-      router.push('/setprofile')
-    }
+   try {
+    console.log("BIPIN BHATTT")
+     const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URI}/myProfile`)
+
+     setProfile(res.data.data)
+     if(res.status!==200){
+       router.push('/setprofile')
+     }
+     
+   } catch (error) {
+      if (error.response) {
+            toast.error(error.response.data.message || "An error occurred")
+          } else if (error.request) {
+            toast.error("No response from the server")
+          } else {
+            toast.error("Something went wrong")
+          }
+   }
 }
 const { user } = profile ; // Destructure user safely
 console.log('USER',user)
@@ -70,8 +84,6 @@ return (
 
           {/* POSTS GOES FORM HERE */}
           <section className="posts  ">
-            <Post avatarLink={profile?.profilePic}/>
-            <Post avatarLink={profile?.profilePic}/>
             <Post avatarLink={profile?.profilePic}/>
             
           </section>

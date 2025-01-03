@@ -6,6 +6,7 @@ import ReduxProvider from "@/redux/reduxProvider";
 export const metadata = {
   title: "Samajik Sanjal",
   description: "Connect and share with friends",
+  
 };
 
 export default function RootLayout({ children }) {
@@ -26,7 +27,7 @@ export default function RootLayout({ children }) {
         <Providers>
         <ToastContainer
           position="top-right"
-          autoClose={3000}
+          autoClose={700}
           hideProgressBar={false}
           newestOnTop={false}
           closeOnClick

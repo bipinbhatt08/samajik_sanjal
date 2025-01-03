@@ -20,7 +20,6 @@ import { useSelector } from "react-redux";
  
   export default function App() {
 
-console.log("HELLo",process.env.NEXT_PUBLIC_API_URI)
 
     const userDetails = useSelector((state)=>(state.user.userDetails))
     

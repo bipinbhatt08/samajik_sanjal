@@ -3,8 +3,8 @@ import { Emoji } from 'emoji-picker-react';
 import React, { useState } from 'react'
 import { FaThumbsUp } from "react-icons/fa";
 
-const TestPost = () => {
-
+const TestPost = ( {avatarLink}) => {
+console.log("LINK",avatarLink)
   const reactions = { 
     like: {
       unified: '1f44d',
@@ -47,6 +47,7 @@ const TestPost = () => {
     const selectedReaction= Object.entries(reactions).find((current, index)=>current[1].unified == emojiCode)
     setReaction(selectedReaction[1])
     setIsReacted(true)
+
   }
 
 
@@ -64,7 +65,7 @@ const handleLikeButtonClick =()=>{
               <div className="postHeader flex justify-start items-center gap-3 mb-3">
                 <div className="avatarAndName">
                   <div className="avatar">
-                    <Avatar size="lg" src="https://i.pravatar.cc/150?u=a04258114e29026302d" />
+                    <Avatar size="lg" src={`${process.env.NEXT_PUBLIC_API_URI}/uploads/${avatarLink}`} />
                   </div>
                 </div>
                 <div className="name">

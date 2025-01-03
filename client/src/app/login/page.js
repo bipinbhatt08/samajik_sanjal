@@ -8,10 +8,11 @@ import axios from 'axios'
 import { toast } from 'react-toastify'
 import { useDispatch } from 'react-redux'
 import { addUserDetail } from '@/redux/reducers/userSlice'
+import { useRouter } from 'next/navigation'
 
 const page = () => {
     const dispatch = useDispatch()
-
+    const router = useRouter()
     const LoginSchema = Yup.object().shape({
         password: Yup.string()
           .required('Password is required'),
@@ -41,6 +42,7 @@ const page = () => {
         }
         dispatch(addUserDetail(data))
         toast.success(data.message)
+        router.push('/createProfile')
     }
 
     return (

@@ -25,8 +25,11 @@ const profileSchema = new Schema({
   },
   gender:{
     type:String,
-    enum : ["Male","Female","Other"],
+    enum : ["male","female","other"],
     
+  },
+  fullname:{
+    type:String,
   }
 
 //should be managed later
