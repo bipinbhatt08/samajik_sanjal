@@ -94,7 +94,7 @@ const page = () => {
       )
       if (res.status === 200) {
         toast.success(res.data.message)
-        router.push(`/profile}`)
+        router.push(`/profile`)
       }
     } catch (error) {
       // Centralized Error Handling

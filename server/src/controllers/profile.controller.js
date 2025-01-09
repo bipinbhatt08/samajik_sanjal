@@ -23,8 +23,8 @@ exports.setUpProfile =async(req,res)=>{
          })  
  
      }
-     const {bio,address,dateOfBirth,phoneNumber,gender}=req.body
-     if(!bio||!address||!dateOfBirth||!phoneNumber||!profilePic||!coverPic||!gender){
+     const {bio,address,dateOfBirth,phoneNumber,gender,fullname}=req.body
+     if(!bio||!address||!dateOfBirth||!phoneNumber||!profilePic||!coverPic||!gender||!fullname){
         console.log("hello bhatij")
         if(coverPic) deleteFile(coverPic)
         if(profilePic) deleteFile(profilePic)
@@ -32,7 +32,7 @@ exports.setUpProfile =async(req,res)=>{
              message: "All fields are required."
          })
      }
-     await Profile.create({bio,address,dateOfBirth,phoneNumber,user,profilePic,coverPic,gender})
+     await Profile.create({bio,address,dateOfBirth,phoneNumber,user,profilePic,coverPic,gender,fullname})
      res.status(200).json({
          message:"Profile set Up successfully"
      })
@@ -57,7 +57,10 @@ exports.getProfile = async(req,res)=>{
             message:"User does not exists"
         })
     }
-    const profile = await Profile.findOne({user:userId})
+    const profile = await Profile.findOne({user:userId}).populate({
+        path: 'user',
+        select: 'username email', 
+      })
     if(!profile){
         return res.status(404).json({
             message:"Profile does not exists."

@@ -43,7 +43,7 @@ return (
               </div>
               <div className="nameContainer flex items-center justify-between   w-full">
                 <div className='w-4/12 '>
-                  <h1 className='text-2xl font-bold'>{profile?.user?.username}</h1>
+                  <h1 className='text-2xl font-bold'>{profile.fullname}</h1>
                   <p>4.1K Friends</p>
                 </div>
                 

@@ -3,13 +3,15 @@ import styles from './profile.module.css';
 import { FaLocationDot,FaEnvelope,FaPhoneVolume, FaCalendarDay } from "react-icons/fa6";
 
 import axios from 'axios'
-import { useParams, useRouter } from 'next/navigation'
-import Navbar from '@/components/navbar'
+import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import { Avatar, Button } from '@nextui-org/react';
 import Post from '@/components/Post';
+import { toast } from 'react-toastify';
+import { useSelector } from 'react-redux';
 
 const page = () => {
+const user = useSelector((state)=>state.user)
 const [profile,setProfile]=useState({})
 const router = useRouter()
 useEffect(()=>{
@@ -19,8 +21,11 @@ useEffect(()=>{
 
 const fetchProfile = async()=>{
    try {
-    console.log("BIPIN BHATTT")
-     const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URI}/myProfile`)
+     const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URI}/profile`,{
+      headers:{
+        Authorization: `Bearer ${user.token}`,
+      }
+     })
 
      setProfile(res.data.data)
      if(res.status!==200){
@@ -37,8 +42,7 @@ const fetchProfile = async()=>{
           }
    }
 }
-const { user } = profile ; // Destructure user safely
-console.log('USER',user)
+console.log("profile", profile)
 return ( 
     <div>
     
@@ -57,7 +61,7 @@ return (
               </div>
               <div className="nameContainer flex items-center justify-between   w-full">
                 <div className='w-4/12 '>
-                  <h1 className='text-2xl font-bold'>{profile?.user?.username}</h1>
+                  <h1 className='text-2xl font-bold'>{profile.fullname}</h1>
                   <p>4.1K Friends</p>
                 </div>
                 
@@ -85,7 +89,7 @@ return (
           {/* POSTS GOES FORM HERE */}
           <section className="posts  ">
             <Post avatarLink={profile?.profilePic}/>
-            
+  
           </section>
         </main>
 
