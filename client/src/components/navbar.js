@@ -14,30 +14,28 @@ import {
   } from "@nextui-org/react";
   import {CiSearch} from 'react-icons/ci'
   import { IoNotifications } from "react-icons/io5";
-import { useSelector } from "react-redux";
 
 
  
-  export default function App() {
-
-
-    const userDetails = useSelector((state)=>(state.user.userDetails))
-    
+  export default function App( {user,profile}) {
+ 
+const {userDetails} = user  
     return (
-     (userDetails)&&<Navbar isBordered>
+     <Navbar isBordered>
         <NavbarContent justify="start">
           <NavbarBrand className="mr-5">
             <img src="/logo.png" className="rounded-full" alt="" width={55}  />
-            {/* <p className="hidden sm:block font-bold text-xl"></p> */}
+            <p className="hidden sm:block font-bold text-xl ml-2">{profile.fullname}</p>
           </NavbarBrand>
+          
           <NavbarContent className="hidden sm:flex gap-4">
             <NavbarItem>
               <Link color="foreground" href="#">
                 Friends
               </Link>
             </NavbarItem>
-            <NavbarItem isActive>
-              <Link aria-current="page" color="primary" href="#">
+            <NavbarItem >
+              <Link color="foreground"  href="#">
                 Add 
               </Link>
             </NavbarItem>
@@ -46,14 +44,15 @@ import { useSelector } from "react-redux";
                 hello
               </Link>
             </NavbarItem>
-            <NavbarItem>
-              <Link color="foreground" href="#" className="flex flex-wrap items-center">
-                <IoNotifications/>
-              </Link>
-            </NavbarItem>
+            
           </NavbarContent>
         </NavbarContent>
         <NavbarContent as="div" className="items-center" justify="end">
+        <NavbarItem>
+              <Link color="foreground" href="#" className="flex flex-wrap items-center">
+                <IoNotifications size={20}/>
+              </Link>
+            </NavbarItem>
           <Input
             classNames={{
               base: "max-w-full sm:max-w-[10rem] h-10",
@@ -75,9 +74,9 @@ import { useSelector } from "react-redux";
                 as="button"
                 className="transition-transform"
                 color="secondary"
-                name={userDetails.username}
+                name={profile.fullname}
                 size="sm"
-                src={`${process.env.NEXT_PUBLIC_API_URI}/uploads/${userDetails?.profilePic}`}
+                src={`${process.env.NEXT_PUBLIC_API_URI}/uploads/${profile?.profilePic}`}
               />
             </DropdownTrigger>
             <DropdownMenu aria-label="Profile Actions" variant="flat">
@@ -85,8 +84,8 @@ import { useSelector } from "react-redux";
                 <p className="font-semibold">Signed in as</p>
                 <p className="font-semibold">{userDetails?.email}</p>
               </DropdownItem>
-              <DropdownItem key="myProfile">My Profile</DropdownItem>
-              <DropdownItem key="setUpProfile" as={Link} href="/demo" className="text-black">Setup Profile</DropdownItem>
+              <DropdownItem key="myProfile" as={Link} href="/profile" className="text-black">My Profile</DropdownItem>
+              <DropdownItem key="setUpProfile"  className="text-black">Edit Profile</DropdownItem>
               <DropdownItem key="logout" color="danger">
                 Log Out
               </DropdownItem>

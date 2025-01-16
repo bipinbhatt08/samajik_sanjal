@@ -1,16 +1,77 @@
 'use client'
 import styles from './profile.module.css';
 import { FaLocationDot,FaEnvelope,FaPhoneVolume, FaCalendarDay } from "react-icons/fa6";
-
+import { IoCreateOutline } from "react-icons/io5";
+import { MdOutlineCreate } from "react-icons/md";
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
-import { Avatar, Button } from '@nextui-org/react';
+import { Avatar, ButtonModal,ModalContent,ModalHeader,ModalBody,ModalFooter,Button,useDisclosure, Modal, } from '@nextui-org/react';
 import Post from '@/components/Post';
 import { toast } from 'react-toastify';
 import { useSelector } from 'react-redux';
 
+
+const CreatePostMOdal =()=>{
+  const {isOpen, onOpen, onOpenChange} = useDisclosure();
+
+  return <>
+            <Button className='border' color='primary' radius='sm' onPress={onOpen}> <IoCreateOutline />Create Post</Button>
+                  <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+                    <ModalContent>
+                      {(onClose) => (
+                        <>
+                          <ModalHeader className="flex flex-col gap-1">Create Post</ModalHeader>
+                          <ModalBody>
+                            CreatePost
+                          </ModalBody>
+                          <ModalFooter>
+                            <Button color="danger" variant="light" onPress={onClose}>
+                              Close
+                            </Button>
+                            <Button color="primary" onPress={onClose}>
+                              Action
+                            </Button>
+                          </ModalFooter>
+                        </>
+                      )}
+                    </ModalContent>
+                  </Modal>
+  
+  </>
+}
+const EditProfileModal =()=>{
+  const {isOpen, onOpen, onOpenChange} = useDisclosure();
+
+
+  return <>
+  <Button className='border' radius='sm'  onPress={onOpen}> <MdOutlineCreate/> Edit Profile</Button>
+                  <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+                    <ModalContent>
+                      {(onClose) => (
+                        <>
+                          <ModalHeader className="flex flex-col gap-1">Edit Profile</ModalHeader>
+                          <ModalBody>
+                            Edit Profile
+                          </ModalBody>
+                          <ModalFooter>
+                            <Button color="danger" variant="light" onPress={onClose}>
+                              Close
+                            </Button>
+                            <Button color="primary" onPress={onClose}>
+                              Action
+                            </Button>
+                          </ModalFooter>
+                        </>
+                      )}
+                    </ModalContent>
+                  </Modal>
+  
+  </>
+}
 const page = () => {
+
+
 const user = useSelector((state)=>state.user)
 const [profile,setProfile]=useState({})
 const router = useRouter()
@@ -66,9 +127,10 @@ return (
                 </div>
                 
                 <div className="buttons w-full flex  justify-end  gap-5 ">
-                  <Button className='border' color='primary' radius='sm'>Add friend</Button>
-                  <Button className='border' radius='sm'>Message</Button>
+                  <CreatePostMOdal/>
+                  <EditProfileModal/>
                 </div>
+
               </div>
             </div>
 
