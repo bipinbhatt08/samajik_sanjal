@@ -1,4 +1,4 @@
-import { Avatar, Tooltip } from '@nextui-org/react'
+import { Avatar, Tooltip } from "@heroui/react"
 import { Emoji } from 'emoji-picker-react';
 import React, { useState } from 'react'
 import { FaThumbsUp } from "react-icons/fa";

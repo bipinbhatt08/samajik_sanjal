@@ -6,7 +6,7 @@ import axios from 'axios'
 import { useParams, useRouter } from 'next/navigation'
 import Navbar from '@/components/navbar'
 import React, { useEffect, useState } from 'react'
-import { Avatar, AvatarGroup, Button, ButtonGroup } from '@nextui-org/react';
+import { Avatar, AvatarGroup, Button, ButtonGroup } from "@heroui/react";
 import Post from '@/components/Post';
 
 const page = () => {

@@ -4,6 +4,7 @@ import Navbar from '@/components/Navbar'
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import axios from 'axios';
+import Post from '@/components/Post'
 export default function Home() {
 
 
@@ -39,6 +40,8 @@ export default function Home() {
   fetchProfile()
  },[])
   return (
+    <>
     <Navbar user={user} profile={profile}></Navbar>
+    </>
   );
 }

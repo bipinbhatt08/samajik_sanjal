@@ -6,7 +6,7 @@ import { MdOutlineCreate } from "react-icons/md";
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
-import { Avatar, ButtonModal,ModalContent,ModalHeader,ModalBody,ModalFooter,Button,useDisclosure, Modal, } from '@nextui-org/react';
+import { Avatar, ButtonModal,ModalContent,ModalHeader,ModalBody,ModalFooter,Button,useDisclosure, Modal, } from "@heroui/react";
 import Post from '@/components/Post';
 import { toast } from 'react-toastify';
 import { useSelector } from 'react-redux';

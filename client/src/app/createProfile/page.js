@@ -4,7 +4,7 @@ import {
   Select,
   SelectItem,
   Textarea,
-} from "@nextui-org/react"
+} from "@heroui/react"
 import axios from "axios"
 import { useFormik } from "formik"
 import * as Yup from "yup"

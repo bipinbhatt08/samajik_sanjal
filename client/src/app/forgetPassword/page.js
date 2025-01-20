@@ -1,5 +1,5 @@
 'use client'
-import { Button,Input } from '@nextui-org/react'
+import { Button,Input } from "@heroui/react"
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import React from 'react'
